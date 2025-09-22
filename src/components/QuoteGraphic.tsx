@@ -1,8 +1,7 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Download } from 'lucide-react';
-import html2canvas from 'html2canvas';
 
 interface QuoteGraphicProps {
   text: string;
@@ -10,32 +9,16 @@ interface QuoteGraphicProps {
 }
 
 export function QuoteGraphic({ text, onDownload }: QuoteGraphicProps) {
-  const canvasRef = useRef<HTMLDivElement>(null);
   const [isGenerating, setIsGenerating] = useState(false);
 
   const downloadImage = async () => {
-    if (!canvasRef.current) return;
-
     setIsGenerating(true);
     try {
-      const canvas = await html2canvas(canvasRef.current, {
-        backgroundColor: '#ffffff',
-        scale: 2,
-        useCORS: true,
-      });
-
-      const imageData = canvas.toDataURL('image/png');
-      onDownload?.(imageData);
-
-      // Create download link
-      const link = document.createElement('a');
-      link.download = 'quillify-quote.png';
-      link.href = imageData;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      // For now, just copy the text to clipboard
+      await navigator.clipboard.writeText(text);
+      alert('Quote text copied to clipboard!');
     } catch (error) {
-      console.error('Error generating image:', error);
+      console.error('Error copying text:', error);
     } finally {
       setIsGenerating(false);
     }
@@ -66,7 +49,6 @@ export function QuoteGraphic({ text, onDownload }: QuoteGraphicProps) {
 
       <div className="flex justify-center">
         <div
-          ref={canvasRef}
           className="bg-gradient-to-br from-indigo-600 to-purple-700 text-white p-8 rounded-2xl shadow-2xl max-w-md mx-auto"
           style={{ width: '400px', height: '300px' }}
         >
