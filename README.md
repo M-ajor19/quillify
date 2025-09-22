@@ -1,6 +1,8 @@
-# Quillify - AI-Powered Social Proof Content Generator
+# Quillify - AI-Powered Social Proof Content Generator ✨
 
 Transform raw customer feedback into polished social proof content in seconds. Quillify is a specialist AI tool that automates the entire workflow from raw input to ready-to-use marketing content.
+
+<!-- Updated for Vercel deployment -->
 
 ## Features
 
