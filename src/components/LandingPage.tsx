@@ -34,84 +34,105 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background with Ken Burns Effect */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-transparent to-purple-600/10"></div>
-        </div>
+      {/* Hero Section - Professional Ken Burns Background */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        {/* Ken Burns Background Effect */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%), url('https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop')`,
+            animation: 'kenBurns 20s ease-in-out infinite alternate',
+          }}
+        />
         
-        {/* Floating Elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-10 w-20 h-20 bg-blue-200/30 rounded-full animate-pulse"></div>
-          <div className="absolute top-40 right-20 w-16 h-16 bg-purple-200/30 rounded-full animate-pulse delay-1000"></div>
-          <div className="absolute bottom-40 left-20 w-24 h-24 bg-indigo-200/30 rounded-full animate-pulse delay-2000"></div>
-          <div className="absolute bottom-20 right-10 w-12 h-12 bg-blue-200/30 rounded-full animate-pulse delay-500"></div>
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
-          <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <h1 className="text-6xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
-              Transform Raw Feedback Into
-              <span className="text-gradient block">Social Proof Gold</span>
+        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-8">
+          <div className={`transition-all duration-1200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <h1 
+              className="text-5xl md:text-6xl font-bold mb-6 leading-tight"
+              style={{
+                textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)',
+                animation: 'heroTitleFadeIn 1.2s ease-out 0.3s forwards',
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
+              }}
+            >
+              Transform Feedback Into Social Proof Gold
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Turn customer reviews, testimonials, and feedback into polished, engaging social media content that builds trust and drives conversions.
+            <p 
+              className="text-xl md:text-2xl mb-8 font-light"
+              style={{
+                animation: 'heroSubtitleFadeIn 1s ease-out 0.8s forwards',
+                opacity: isVisible ? 0.9 : 0,
+                transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+              }}
+            >
+              Turn raw customer reviews into polished, engaging social media content that builds trust and drives conversions.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link href="/app" className="bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2">
-                <span>Start Creating</span>
-                <ArrowRight className="h-5 w-5" />
+            <div 
+              className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+              style={{
+                animation: 'ctaFadeIn 0.8s ease-out 1.2s forwards',
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+              }}
+            >
+              <Link 
+                href="/app" 
+                className="group relative inline-flex items-center gap-3 px-8 py-4 bg-transparent text-white border-2 border-cyan-400 rounded-lg font-semibold text-lg transition-all duration-400 hover:border-cyan-300 hover:shadow-lg hover:shadow-cyan-500/30 hover:-translate-y-1 overflow-hidden"
+              >
+                <span className="relative z-10">Start Creating Content</span>
+                <ArrowRight className="h-5 w-5 relative z-10 transition-transform group-hover:translate-x-1" />
+                <div className="absolute inset-0 bg-cyan-500 transition-transform duration-400 -translate-x-full group-hover:translate-x-0"></div>
               </Link>
-              <button className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-xl text-lg font-semibold hover:border-blue-600 hover:text-blue-600 transition-all duration-300 flex items-center space-x-2">
+              <button className="px-8 py-4 border-2 border-white/30 text-white rounded-lg font-semibold text-lg hover:border-white/60 hover:bg-white/10 transition-all duration-300 flex items-center gap-3">
                 <Play className="h-5 w-5" />
-                <span>Watch Demo</span>
+                Watch Demo
               </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section id="features" className="py-24 bg-gray-50">
+      {/* Features Section - Professional Style */}
+      <section id="features" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6" style={{ fontFamily: 'var(--font-display)' }}>
               Why Choose Quillify?
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Powerful AI-driven content transformation that saves you hours while creating compelling social proof.
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Powerful AI-driven content transformation that saves you hours while creating compelling social proof that converts.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-              <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
-                <Zap className="h-8 w-8 text-blue-600" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="text-center group">
+              <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-8 mx-auto shadow-lg group-hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-2">
+                <Zap className="h-10 w-10 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Lightning Fast</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Transform raw feedback into polished content in seconds, not hours. Our AI understands context and tone.
+              <h3 className="text-2xl font-bold text-gray-900 mb-6" style={{ fontFamily: 'var(--font-display)' }}>Lightning Fast</h3>
+              <p className="text-gray-600 leading-relaxed text-lg">
+                Transform raw feedback into polished content in seconds, not hours. Our AI understands context and tone perfectly.
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-              <div className="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center mb-6">
-                <Shield className="h-8 w-8 text-green-600" />
+            <div className="text-center group">
+              <div className="w-20 h-20 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center mb-8 mx-auto shadow-lg group-hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-2">
+                <Shield className="h-10 w-10 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Authentic Voice</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Maintains the authentic voice of your customers while enhancing readability and impact.
+              <h3 className="text-2xl font-bold text-gray-900 mb-6" style={{ fontFamily: 'var(--font-display)' }}>Authentic Voice</h3>
+              <p className="text-gray-600 leading-relaxed text-lg">
+                Maintains the authentic voice of your customers while enhancing readability and impact for maximum engagement.
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-              <div className="w-16 h-16 bg-purple-100 rounded-xl flex items-center justify-center mb-6">
-                <TrendingUp className="h-8 w-8 text-purple-600" />
+            <div className="text-center group">
+              <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-8 mx-auto shadow-lg group-hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-2">
+                <TrendingUp className="h-10 w-10 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Boost Engagement</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Create compelling social proof that increases engagement and drives more conversions.
+              <h3 className="text-2xl font-bold text-gray-900 mb-6" style={{ fontFamily: 'var(--font-display)' }}>Boost Engagement</h3>
+              <p className="text-gray-600 leading-relaxed text-lg">
+                Create compelling social proof that increases engagement and drives more conversions than ever before.
               </p>
             </div>
           </div>
@@ -158,62 +179,65 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section id="testimonials" className="py-24 bg-gray-50">
+      {/* Testimonials Section - Professional Layered Design */}
+      <section id="testimonials" className="py-24 bg-white relative">
+        {/* Subtle background line */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+        
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Loved by Content Creators
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6" style={{ fontFamily: 'var(--font-display)' }}>
+              Trusted by Leading Content Creators
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              See how Quillify is helping businesses turn feedback into powerful social proof.
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              See how Quillify is helping businesses turn feedback into powerful social proof that drives real results.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white p-8 rounded-2xl shadow-lg relative">
-              <div className="text-6xl text-blue-200 absolute top-4 left-6">&ldquo;</div>
-              <p className="text-gray-700 text-lg leading-relaxed mb-6 relative z-10 mt-4">
+            <div className="bg-gray-50 p-8 rounded-lg relative transition-all duration-400 hover:shadow-xl hover:-translate-y-2 border border-gray-200 overflow-hidden group">
+              <div className="text-8xl text-gray-200 absolute -top-4 left-6 font-serif transition-all duration-300 group-hover:text-blue-100 group-hover:scale-110">&ldquo;</div>
+              <p className="text-gray-700 text-lg leading-relaxed mb-8 relative z-10 mt-8 italic">
                 Quillify has completely transformed how we handle customer testimonials. What used to take hours now takes minutes, and the quality is incredible.
               </p>
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                  <Users className="h-6 w-6 text-blue-600" />
+              <div className="flex items-center space-x-4 relative z-10">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center">
+                  <Users className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-900">Sarah Chen</h4>
+                  <h4 className="font-bold text-gray-900" style={{ fontFamily: 'var(--font-display)' }}>Sarah Chen</h4>
                   <p className="text-gray-600">Marketing Director, TechCorp</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl shadow-lg relative">
-              <div className="text-6xl text-blue-200 absolute top-4 left-6">&ldquo;</div>
-              <p className="text-gray-700 text-lg leading-relaxed mb-6 relative z-10 mt-4">
+            <div className="bg-gray-50 p-8 rounded-lg relative transition-all duration-400 hover:shadow-xl hover:-translate-y-2 border border-gray-200 overflow-hidden group">
+              <div className="text-8xl text-gray-200 absolute -top-4 left-6 font-serif transition-all duration-300 group-hover:text-emerald-100 group-hover:scale-110">&ldquo;</div>
+              <p className="text-gray-700 text-lg leading-relaxed mb-8 relative z-10 mt-8 italic">
                 The AI understands context so well. It maintains the authenticity while making our testimonials much more engaging and shareable.
               </p>
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                  <Star className="h-6 w-6 text-green-600" />
+              <div className="flex items-center space-x-4 relative z-10">
+                <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center">
+                  <Star className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-900">Marcus Rodriguez</h4>
+                  <h4 className="font-bold text-gray-900" style={{ fontFamily: 'var(--font-display)' }}>Marcus Rodriguez</h4>
                   <p className="text-gray-600">Founder, GrowthLab</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl shadow-lg relative">
-              <div className="text-6xl text-blue-200 absolute top-4 left-6">&ldquo;</div>
-              <p className="text-gray-700 text-lg leading-relaxed mb-6 relative z-10 mt-4">
+            <div className="bg-gray-50 p-8 rounded-lg relative transition-all duration-400 hover:shadow-xl hover:-translate-y-2 border border-gray-200 overflow-hidden group">
+              <div className="text-8xl text-gray-200 absolute -top-4 left-6 font-serif transition-all duration-300 group-hover:text-purple-100 group-hover:scale-110">&ldquo;</div>
+              <p className="text-gray-700 text-lg leading-relaxed mb-8 relative z-10 mt-8 italic">
                 Our social media engagement has increased by 40% since using Quillify. The content it generates is just more compelling.
               </p>
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                  <TrendingUp className="h-6 w-6 text-purple-600" />
+              <div className="flex items-center space-x-4 relative z-10">
+                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center">
+                  <TrendingUp className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-900">Emily Watson</h4>
+                  <h4 className="font-bold text-gray-900" style={{ fontFamily: 'var(--font-display)' }}>Emily Watson</h4>
                   <p className="text-gray-600">Social Media Manager, InnovateCo</p>
                 </div>
               </div>
@@ -222,25 +246,37 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 bg-blue-600 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600"></div>
-        <div className="absolute inset-0 bg-black/10"></div>
+      {/* CTA Section - Professional Background */}
+      <section className="py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+        {/* Subtle pattern overlay */}
+        <div 
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage: `url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="white"/><circle cx="80" cy="80" r="2" fill="white"/><circle cx="40" cy="60" r="1" fill="white"/><circle cx="70" cy="30" r="1" fill="white"/></svg>')`,
+            backgroundSize: '50px 50px',
+          }}
+        />
         
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Ready to Transform Your Feedback?
+        <div className="relative z-10 max-w-4xl mx-auto text-center text-white px-6">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ fontFamily: 'var(--font-display)' }}>
+            Ready to Transform Your Content?
           </h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-            Join thousands of businesses already using Quillify to create compelling social proof content.
+          <p className="text-xl mb-10 opacity-90 leading-relaxed">
+            Join thousands of content creators who are already using Quillify to create compelling social proof that drives real business results.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/app" className="bg-white text-blue-600 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg">
-              Start Free Trial
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <Link 
+              href="/app" 
+              className="group relative inline-flex items-center gap-3 px-8 py-4 bg-cyan-500 text-white rounded-lg font-semibold text-lg transition-all duration-400 hover:bg-cyan-400 hover:shadow-lg hover:shadow-cyan-500/30 hover:-translate-y-1 overflow-hidden"
+            >
+              <span className="relative z-10">Start Creating Free</span>
+              <ArrowRight className="h-5 w-5 relative z-10 transition-transform group-hover:translate-x-1" />
+              <div className="absolute inset-0 bg-cyan-400 transition-transform duration-400 -translate-x-full group-hover:translate-x-0"></div>
             </Link>
-            <button className="border-2 border-white text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-white hover:text-blue-600 transition-all duration-300">
-              View Pricing
-            </button>
+            <div className="flex items-center gap-2 text-gray-300">
+              <Star className="h-5 w-5 text-yellow-400 fill-current" />
+              <span>No credit card required</span>
+            </div>
           </div>
         </div>
       </section>
