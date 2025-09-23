@@ -5,3 +5,4 @@ node_modules/**/micromatch/**
 .DS_Store
 .env.local
 .env.*.local
+
