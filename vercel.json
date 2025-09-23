@@ -6,5 +6,15 @@
     "src/app/api/ocr/route.ts": {
       "maxDuration": 30
     }
-  }
+  },
+  "domains": [
+    "quillify.tech",
+    "www.quillify.tech"
+  ],
+  "redirects": [
+    {
+      "source": "/www/(.*)",
+      "destination": "/$1"
+    }
+  ]
 }
