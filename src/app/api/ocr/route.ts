@@ -18,7 +18,7 @@ async function extractTextFromImage(imageBuffer: Buffer): Promise<string> {
     const openai = getOpenAI();
     
     const response = await openai.chat.completions.create({
-      model: "gpt-4-vision-preview",
+      model: "gpt-5",
       messages: [
         {
           role: "user",
@@ -36,7 +36,7 @@ async function extractTextFromImage(imageBuffer: Buffer): Promise<string> {
           ]
         }
       ],
-      max_tokens: 1000,
+      max_completion_tokens: 1000,
     });
 
     return response.choices[0].message.content || "Could not extract text from image.";

@@ -1,20 +1,15 @@
 {
-  "functions": {
-    "src/app/api/generate/route.ts": {
-      "maxDuration": 30
-    },
-    "src/app/api/ocr/route.ts": {
-      "maxDuration": 30
-    }
-  },
-  "domains": [
-    "quillify.tech",
-    "www.quillify.tech"
-  ],
-  "redirects": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/www/(.*)",
-      "destination": "/$1"
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
     }
   ]
 }
