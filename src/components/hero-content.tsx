@@ -11,7 +11,7 @@ export default function HeroContent() {
           }}
         >
           <div className="absolute top-0 left-1 right-1 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent rounded-full" />
-          <span className="text-white/90 text-xs font-light relative z-10">{"✨ Your Personal AI Content Specialist."}  </span>
+          <span className="text-white/90 text-xs font-light relative z-10">{"✨ SHADER VERSION - Your Personal AI Content Specialist."}  </span>
         </div>
 
        
