@@ -14,8 +14,6 @@ const nextConfig = {
   },
   // Disable static optimization
   trailingSlash: true,
-  // Force revalidation
-  revalidate: 0,
 };
 
 export default nextConfig;
