@@ -8,6 +8,14 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: [],
   },
+  // Force cache invalidation
+  generateBuildId: async () => {
+    return `build-${Date.now()}`;
+  },
+  // Disable static optimization
+  trailingSlash: true,
+  // Force revalidation
+  revalidate: 0,
 };
 
 export default nextConfig;
