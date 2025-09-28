@@ -54,7 +54,7 @@ export default function FeaturesSection() {
   ]
 
   return (
-    <section className="py-20 bg-background">
+    <section id="features" className="py-20 bg-background">
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-3 gap-12">
           {features.map((feature, index) => (
