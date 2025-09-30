@@ -32,7 +32,7 @@ Focus on identifying the most valuable and shareable aspects of the feedback.
   try {
     const openai = getOpenAI();
     const response = await openai.chat.completions.create({
-      model: "gpt-5",
+      model: "gpt-4o",
       messages: [{ role: "user", content: analysisPrompt }],
       temperature: 0.1,
     });
@@ -106,7 +106,7 @@ async function generateContent(masterPrompt: string) {
   try {
     const openai = getOpenAI();
     const response = await openai.chat.completions.create({
-      model: "gpt-5",
+      model: "gpt-4o",
       messages: [{ role: "user", content: masterPrompt }],
       temperature: 0.7,
       max_completion_tokens: 1000,
