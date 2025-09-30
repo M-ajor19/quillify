@@ -137,7 +137,7 @@ export function SignInScreen() {
                     ) : (
                       <>
                         <Mail className="w-5 h-5" />
-                        <span>Send Magic Link</span>
+                        <span>Send Link</span>
                       </>
                     )}
                   </button>
@@ -185,22 +185,6 @@ export function SignInScreen() {
             )}
           </>
         )}
-
-        {/* Features */}
-        <div className="mt-12 space-y-4">
-          <div className="flex items-center space-x-3 text-[#A1A1AA]">
-            <div className="w-2 h-2 bg-[#A855F7] rounded-full"></div>
-            <span className="text-sm">3 free credits to get started</span>
-          </div>
-          <div className="flex items-center space-x-3 text-[#A1A1AA]">
-            <div className="w-2 h-2 bg-[#A855F7] rounded-full"></div>
-            <span className="text-sm">No credit card required</span>
-          </div>
-          <div className="flex items-center space-x-3 text-[#A1A1AA]">
-            <div className="w-2 h-2 bg-[#A855F7] rounded-full"></div>
-            <span className="text-sm">Cancel anytime</span>
-          </div>
-        </div>
 
         {/* Footer */}
         <div className="mt-12 text-center">
