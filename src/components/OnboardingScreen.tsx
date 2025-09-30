@@ -12,7 +12,7 @@ export function OnboardingScreen({ onGenerate }: OnboardingScreenProps) {
         {/* Welcome Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-semibold text-[#F5F5F7] mb-4">
-            Welcome. Let's create something. - Twizzler Test
+            Welcome. Let's create something.
           </h1>
           <p className="text-lg text-[#A1A1AA] max-w-2xl mx-auto">
             Transform your raw content into polished, professional pieces with the power of digital alchemy.
