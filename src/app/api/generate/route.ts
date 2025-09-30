@@ -1,4 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { supabaseAdmin } from '@/lib/supabase';
 import OpenAI from 'openai';
 
 const getOpenAI = () => {
@@ -133,6 +136,12 @@ function validateAndFormatContent(content: string[], format: string) {
 
 export async function POST(request: NextRequest) {
   try {
+    // Check authentication
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const { inputText, tone, format } = await request.json();
 
     // Validation
@@ -155,6 +164,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid format selected' }, { status: 400 });
     }
 
+    // Check user credits
+    const { data: user } = await supabaseAdmin
+      .from('users')
+      .select('credits')
+      .eq('id', session.user.id)
+      .single();
+
+    if (!user || user.credits <= 0) {
+      return NextResponse.json({ error: 'Insufficient credits' }, { status: 402 });
+    }
+
     // Stage 1: Analyze input
     const analysis = await analyzeInput(inputText);
 
@@ -171,7 +191,40 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'No content generated' }, { status: 500 });
     }
 
-    return NextResponse.json({ content: finalContent });
+    // Deduct credit and record transaction
+    const creditsUsed = 1;
+    const newCredits = user.credits - creditsUsed;
+
+    await supabaseAdmin
+      .from('users')
+      .update({ credits: newCredits })
+      .eq('id', session.user.id);
+
+    // Record credit transaction
+    await supabaseAdmin
+      .from('credit_transactions')
+      .insert({
+        user_id: session.user.id,
+        amount: -creditsUsed,
+        type: 'usage',
+      });
+
+    // Record content generation
+    await supabaseAdmin
+      .from('content_generations')
+      .insert({
+        user_id: session.user.id,
+        input_text: inputText,
+        output_text: finalContent[0],
+        format: format,
+        tone: tone,
+        credits_used: creditsUsed,
+      });
+
+    return NextResponse.json({ 
+      content: finalContent,
+      creditsRemaining: newCredits 
+    });
   } catch (error) {
     console.error('Error in generate API:', error);
     

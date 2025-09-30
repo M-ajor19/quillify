@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { signOut } from 'next-auth/react';
 import { QuillifyLogo } from './QuillifyLogo';
 import { ChevronDown, User, Settings, LogOut, Coins } from 'lucide-react';
 
@@ -64,7 +65,10 @@ export function Navbar({ credits, onBuyCredits, onDashboard, showDashboard }: Na
                       <Settings className="w-4 h-4" />
                       <span className="text-sm">Account Settings</span>
                     </button>
-                    <button className="w-full flex items-center space-x-3 px-3 py-2 hover:bg-[#27272A] rounded-md transition-colors text-red-400">
+                    <button 
+                      onClick={() => signOut()}
+                      className="w-full flex items-center space-x-3 px-3 py-2 hover:bg-[#27272A] rounded-md transition-colors text-red-400"
+                    >
                       <LogOut className="w-4 h-4" />
                       <span className="text-sm">Logout</span>
                     </button>

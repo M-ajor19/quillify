@@ -1,5 +1,6 @@
-import React from 'react';
-import { X, Check, Gift, Zap, Crown } from 'lucide-react';
+import React, { useState } from 'react';
+import { X, Check, Gift, Zap, Crown, Loader } from 'lucide-react';
+import { CREDIT_PACKAGES } from '@/lib/stripe';
 
 interface PurchaseModalProps {
   onClose: () => void;
@@ -7,51 +8,30 @@ interface PurchaseModalProps {
 }
 
 export function PurchaseModal({ onClose, onPurchase }: PurchaseModalProps) {
-  const plans = [
-    {
-      name: 'Free Trial',
-      credits: 2,
-      price: 0,
-      popular: false,
-      icon: Gift,
-      buttonText: 'Get Started',
-      features: [
-        '2 Free Credits',
-        'Access to all core features',
-      ],
-    },
-    {
-      name: 'Starter Pack',
-      credits: 10,
-      price: 19,
-      popular: true,
-      icon: Zap,
-      buttonText: 'Buy Now',
-      features: [
-        '10 Credits',
-        'One-Time Purchase',
-      ],
-    },
-    {
-      name: 'Pro Pack',
-      credits: 30,
-      price: 49,
-      popular: false,
-      icon: Crown,
-      buttonText: 'Buy Now',
-      features: [
-        '30 Credits',
-        'One-Time Purchase',
-      ],
-    },
-  ];
+  const [loading, setLoading] = useState<string | null>(null);
 
-  const handlePurchase = (credits: number, price: number) => {
-    // In a real app, this would integrate with Stripe
-    // For demo purposes, we'll simulate a successful purchase
-    setTimeout(() => {
-      onPurchase(credits);
-    }, 1000);
+  const handlePurchase = async (packageId: string) => {
+    setLoading(packageId);
+    
+    try {
+      const response = await fetch('/api/stripe/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ packageId }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create checkout session');
+      }
+
+      const { url } = await response.json();
+      window.location.href = url;
+    } catch (error) {
+      console.error('Error creating checkout session:', error);
+      setLoading(null);
+    }
   };
 
   return (
@@ -74,19 +54,20 @@ export function PurchaseModal({ onClose, onPurchase }: PurchaseModalProps) {
         {/* Plans */}
         <div className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {plans.map((plan) => {
-              const IconComponent = plan.icon;
+            {CREDIT_PACKAGES.map((plan, index) => {
+              const isPopular = index === 1; // Make middle plan popular
+              const IconComponent = index === 0 ? Zap : index === 1 ? Crown : Gift;
               
               return (
                 <div
-                  key={plan.name}
+                  key={plan.id}
                   className={`relative bg-[#101014] border rounded-xl p-6 transition-all hover:scale-105 ${
-                    plan.popular 
+                    isPopular 
                       ? 'border-[#A855F7] ring-2 ring-[#A855F7]/20' 
                       : 'border-[#27272A] hover:border-[#A855F7]/50'
                   }`}
                 >
-                  {plan.popular && (
+                  {isPopular && (
                     <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                       <span className="bg-[#A855F7] text-white px-4 py-1 rounded-full text-sm font-medium">
                         Most Popular
@@ -97,10 +78,10 @@ export function PurchaseModal({ onClose, onPurchase }: PurchaseModalProps) {
                   {/* Plan Header */}
                   <div className="text-center mb-6">
                     <div className="mb-4">
-                      <IconComponent className={`w-12 h-12 mx-auto ${plan.popular ? 'text-[#A855F7]' : 'text-[#A1A1AA]'}`} />
+                      <IconComponent className={`w-12 h-12 mx-auto ${isPopular ? 'text-[#A855F7]' : 'text-[#A1A1AA]'}`} />
                     </div>
                     <h3 className="text-xl font-semibold text-[#F5F5F7] mb-2">{plan.name}</h3>
-                    {plan.popular && (
+                    {isPopular && (
                       <div className="mb-2">
                         <span className="inline-block bg-[#A855F7]/20 text-[#A855F7] px-3 py-1 rounded-full text-xs font-medium">
                           Recommended
@@ -109,7 +90,7 @@ export function PurchaseModal({ onClose, onPurchase }: PurchaseModalProps) {
                     )}
                     <div className="mb-2">
                       <span className="text-3xl font-bold text-[#F5F5F7]">
-                        {plan.price === 0 ? 'Free' : `$${plan.price}`}
+                        ${plan.price}
                       </span>
                     </div>
                   </div>
@@ -117,25 +98,39 @@ export function PurchaseModal({ onClose, onPurchase }: PurchaseModalProps) {
                   {/* Features */}
                   <div className="mb-6">
                     <ul className="space-y-3">
-                      {plan.features.map((feature, index) => (
-                        <li key={index} className="flex items-center space-x-3">
-                          <Check className="w-4 h-4 text-[#A855F7] flex-shrink-0" />
-                          <span className="text-sm text-[#A1A1AA]">{feature}</span>
-                        </li>
-                      ))}
+                      <li className="flex items-center space-x-3">
+                        <Check className="w-4 h-4 text-[#A855F7] flex-shrink-0" />
+                        <span className="text-sm text-[#A1A1AA]">{plan.credits} Credits</span>
+                      </li>
+                      <li className="flex items-center space-x-3">
+                        <Check className="w-4 h-4 text-[#A855F7] flex-shrink-0" />
+                        <span className="text-sm text-[#A1A1AA]">{plan.description}</span>
+                      </li>
+                      <li className="flex items-center space-x-3">
+                        <Check className="w-4 h-4 text-[#A855F7] flex-shrink-0" />
+                        <span className="text-sm text-[#A1A1AA]">One-Time Purchase</span>
+                      </li>
                     </ul>
                   </div>
 
                   {/* Buy Button */}
                   <button
-                    onClick={() => handlePurchase(plan.credits, plan.price)}
-                    className={`w-full py-3 rounded-lg font-medium transition-all hover:scale-105 ${
-                      plan.popular
+                    onClick={() => handlePurchase(plan.id)}
+                    disabled={loading === plan.id}
+                    className={`w-full py-3 rounded-lg font-medium transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 ${
+                      isPopular
                         ? 'bg-[#A855F7] hover:bg-[#9333EA] text-white'
                         : 'bg-[#27272A] hover:bg-[#A855F7] text-[#F5F5F7]'
                     }`}
                   >
-                    {plan.buttonText}
+                    {loading === plan.id ? (
+                      <>
+                        <Loader className="w-4 h-4 animate-spin" />
+                        <span>Processing...</span>
+                      </>
+                    ) : (
+                      'Buy Now'
+                    )}
                   </button>
                 </div>
               );
