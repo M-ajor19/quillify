@@ -10,6 +10,12 @@ CREATE TABLE IF NOT EXISTS users (
   email TEXT UNIQUE NOT NULL,
   name TEXT,
   credits INTEGER DEFAULT 3,
+  -- Professional data from LinkedIn
+  job_title TEXT,
+  company TEXT,
+  industry TEXT,
+  -- Auth provider info
+  auth_provider TEXT DEFAULT 'email',
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );

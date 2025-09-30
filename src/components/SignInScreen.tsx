@@ -3,7 +3,7 @@
 import React from 'react';
 import { signIn } from 'next-auth/react';
 import { QuillifyLogo } from './QuillifyLogo';
-import { Github, Chrome } from 'lucide-react';
+import { Github, Chrome, Linkedin } from 'lucide-react';
 
 export function SignInScreen() {
   return (
@@ -30,6 +30,14 @@ export function SignInScreen() {
           >
             <Chrome className="w-5 h-5" />
             <span>Continue with Google</span>
+          </button>
+
+          <button
+            onClick={() => signIn('linkedin')}
+            className="w-full bg-[#0077B5] hover:bg-[#005885] text-white py-4 px-6 rounded-lg font-medium transition-all duration-200 hover:scale-105 flex items-center justify-center space-x-3"
+          >
+            <Linkedin className="w-5 h-5" />
+            <span>Continue with LinkedIn</span>
           </button>
 
           <button

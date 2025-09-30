@@ -1,6 +1,7 @@
 import { NextAuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import GitHubProvider from "next-auth/providers/github"
+import LinkedInProvider from "next-auth/providers/linkedin"
 import { supabaseAdmin } from "@/lib/supabase"
 
 export const authOptions: NextAuthOptions = {
@@ -8,6 +9,28 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+    LinkedInProvider({
+      clientId: process.env.LINKEDIN_CLIENT_ID!,
+      clientSecret: process.env.LINKEDIN_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          scope: 'openid profile email',
+        },
+      },
+      profile(profile) {
+        return {
+          id: profile.sub,
+          name: profile.name,
+          email: profile.email,
+          image: profile.picture,
+          credits: 0, // Will be set in database
+          // LinkedIn-specific professional data
+          jobTitle: profile.job_title || null,
+          company: profile.company || null,
+          industry: profile.industry || null,
+        }
+      },
     }),
     GitHubProvider({
       clientId: process.env.GITHUB_CLIENT_ID!,
@@ -49,6 +72,19 @@ export const authOptions: NextAuthOptions = {
           .single()
 
         if (!existingUser) {
+          // Determine auth provider
+          const authProvider = account?.provider || 'email'
+          
+          // Extract professional data for LinkedIn users
+          const professionalData = authProvider === 'linkedin' ? {
+            job_title: (user as any).jobTitle || null,
+            company: (user as any).company || null,
+            industry: (user as any).industry || null,
+            auth_provider: authProvider,
+          } : {
+            auth_provider: authProvider,
+          }
+
           await supabaseAdmin
             .from('users')
             .insert({
@@ -56,6 +92,7 @@ export const authOptions: NextAuthOptions = {
               email: user.email,
               name: user.name,
               credits: 3, // Free trial credits
+              ...professionalData,
             })
         }
 
