@@ -1,19 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Minimal config to avoid build trace issues
+  // Minimal config to avoid build issues
   swcMinify: true,
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
-  },
   experimental: {
     serverComponentsExternalPackages: [],
   },
-  // Force cache invalidation
+  // Force cache invalidation for Vercel
   generateBuildId: async () => {
-    return `build-${Date.now()}`;
+    return `quillify-${Date.now()}`;
   },
-  // Disable static optimization
-  trailingSlash: true,
 };
 
 export default nextConfig;
