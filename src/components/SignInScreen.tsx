@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { QuillifyLogo } from './QuillifyLogo';
-import { Github, Chrome, Linkedin, Mail, Loader } from 'lucide-react';
+import { Chrome, Linkedin, Mail, Loader } from 'lucide-react';
 
 export function SignInScreen() {
   const [showEmailForm, setShowEmailForm] = useState(false);
@@ -75,13 +75,6 @@ export function SignInScreen() {
                 <span>Continue with LinkedIn</span>
               </button>
 
-              <button
-                onClick={() => signIn('github')}
-                className="w-full bg-[#18181B] hover:bg-[#27272A] text-[#F5F5F7] py-4 px-6 rounded-lg font-medium transition-all duration-200 hover:scale-105 flex items-center justify-center space-x-3 border border-[#27272A]"
-              >
-                <Github className="w-5 h-5" />
-                <span>Continue with GitHub</span>
-              </button>
             </div>
 
             {/* Divider */}
