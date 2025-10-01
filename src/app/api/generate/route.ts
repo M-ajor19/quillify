@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { supabaseAdmin } from '@/lib/supabase';
+import { checkDatabaseRateLimit } from '@/lib/rate-limiter';
 import OpenAI from 'openai';
 
 const getOpenAI = () => {
@@ -164,14 +165,36 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid format selected' }, { status: 400 });
     }
 
-    // Check user credits
-    const { data: user } = await supabaseAdmin
-      .from('users')
-      .select('credits')
-      .eq('id', session.user.id)
-      .single();
+    // Check rate limiting (10 generations per hour per user)
+    const rateLimitCheck = await checkDatabaseRateLimit(session.user.id, 'generate', 60, 10);
+    if (!rateLimitCheck.success) {
+      return NextResponse.json({ 
+        error: 'Rate limit exceeded. Please try again later.',
+        resetTime: rateLimitCheck.reset.toISOString()
+      }, { 
+        status: 429,
+        headers: {
+          'X-RateLimit-Limit': rateLimitCheck.limit.toString(),
+          'X-RateLimit-Remaining': rateLimitCheck.remaining.toString(),
+          'X-RateLimit-Reset': rateLimitCheck.reset.toISOString()
+        }
+      });
+    }
 
-    if (!user || user.credits <= 0) {
+    // Check user credits - using atomic operation to prevent race conditions
+    const creditsUsed = 1;
+    const { data: creditCheck, error: creditError } = await supabaseAdmin
+      .rpc('deduct_user_credits', {
+        user_id: session.user.id,
+        credits_to_deduct: creditsUsed
+      });
+
+    if (creditError || !creditCheck) {
+      console.error('Credit deduction error:', creditError);
+      return NextResponse.json({ error: 'Failed to process credits' }, { status: 500 });
+    }
+
+    if (!creditCheck.success) {
       return NextResponse.json({ error: 'Insufficient credits' }, { status: 402 });
     }
 
@@ -191,14 +214,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'No content generated' }, { status: 500 });
     }
 
-    // Deduct credit and record transaction
-    const creditsUsed = 1;
-    const newCredits = user.credits - creditsUsed;
-
-    await supabaseAdmin
-      .from('users')
-      .update({ credits: newCredits })
-      .eq('id', session.user.id);
+    // Credits already deducted atomically above
+    const newCredits = creditCheck.remaining_credits;
 
     // Record credit transaction
     await supabaseAdmin
@@ -228,12 +245,32 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Error in generate API:', error);
     
+    // If we've already deducted credits but failed during generation,
+    // we should refund the user (this is a critical business logic)
+    if (typeof creditCheck !== 'undefined' && creditCheck?.success) {
+      try {
+        // Refund the credits by adding them back
+        await supabaseAdmin
+          .from('users')
+          .update({ credits: creditCheck.remaining_credits + creditsUsed })
+          .eq('id', session.user.id);
+          
+        console.log(`Refunded ${creditsUsed} credits to user ${session.user.id} due to generation failure`);
+      } catch (refundError) {
+        console.error('Failed to refund credits:', refundError);
+        // This is a critical error that should be monitored
+      }
+    }
+    
     if (error instanceof Error) {
       if (error.message.includes('API key')) {
-        return NextResponse.json({ error: 'Invalid API key' }, { status: 401 });
+        return NextResponse.json({ error: 'Service temporarily unavailable' }, { status: 503 });
       }
       if (error.message.includes('quota')) {
-        return NextResponse.json({ error: 'API quota exceeded' }, { status: 429 });
+        return NextResponse.json({ error: 'Service quota exceeded. Please try again later.' }, { status: 429 });
+      }
+      if (error.message.includes('rate')) {
+        return NextResponse.json({ error: 'Too many requests. Please slow down.' }, { status: 429 });
       }
     }
 

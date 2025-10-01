@@ -26,6 +26,18 @@ export async function POST(request: NextRequest) {
     const { userId, credits, packageId } = session.metadata!;
 
     try {
+      // Check if we've already processed this webhook (idempotency)
+      const { data: existingTransaction } = await supabaseAdmin
+        .from('credit_transactions')
+        .select('id')
+        .eq('stripe_checkout_session_id', session.id)
+        .single();
+
+      if (existingTransaction) {
+        console.log(`Webhook ${session.id} already processed`);
+        return NextResponse.json({ received: true });
+      }
+
       // Add credits to user account
       const { data: user } = await supabaseAdmin
         .from('users')
@@ -42,7 +54,7 @@ export async function POST(request: NextRequest) {
           .update({ credits: newCredits })
           .eq('id', userId);
 
-        // Record transaction
+        // Record transaction with checkout session ID for idempotency
         await supabaseAdmin
           .from('credit_transactions')
           .insert({
@@ -50,12 +62,20 @@ export async function POST(request: NextRequest) {
             amount: parseInt(credits),
             type: 'purchase',
             stripe_payment_intent_id: session.payment_intent as string,
+            stripe_checkout_session_id: session.id,
           });
 
         console.log(`Added ${credits} credits to user ${userId}`);
       }
     } catch (error) {
       console.error('Error processing payment:', error);
+      
+      // If it's a unique constraint violation, it means we already processed this webhook
+      if (error?.code === '23505') {
+        console.log(`Webhook ${session.id} already processed (duplicate detected)`);
+        return NextResponse.json({ received: true });
+      }
+      
       return NextResponse.json({ error: 'Payment processing failed' }, { status: 500 });
     }
   }
