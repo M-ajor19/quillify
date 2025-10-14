@@ -4,8 +4,8 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Providers } from "@/components/Providers";
 
 export const metadata: Metadata = {
-  title: "Quillify - Transform Feedback into Social Proof",
-  description: "Turn customer reviews, testimonials, and feedback into polished, engaging social media content that builds trust and drives conversions.",
+  title: "Continuum - Intelligent Infrastructure for Your Brand's Voice",
+  description: "An adaptive written-content engine designed to remember, learn, and build with you. Build living systems of knowledge and communication for your brand.",
 };
 
 export default function RootLayout({
