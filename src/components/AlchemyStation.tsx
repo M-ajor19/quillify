@@ -32,7 +32,7 @@ export function AlchemyStation({ credits = 3, onGenerate, onCreditsUsed, isOnboa
     { value: 'authoritative', label: 'Authoritative' },
   ];
 
-  const handleQuillify = async () => {
+  const handleTransform = async () => {
     if (!inputText.trim() || credits <= 0) return;
 
     setIsGenerating(true);
@@ -91,7 +91,7 @@ export function AlchemyStation({ credits = 3, onGenerate, onCreditsUsed, isOnboa
     const element = document.createElement('a');
     const file = new Blob([generatedContent], { type: 'text/plain' });
     element.href = URL.createObjectURL(file);
-    element.download = `quillify-${outputType}-${Date.now()}.txt`;
+    element.download = `continuum-${outputType}-${Date.now()}.txt`;
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
@@ -162,21 +162,21 @@ export function AlchemyStation({ credits = 3, onGenerate, onCreditsUsed, isOnboa
             </div>
           </div>
 
-          {/* Quillify Button */}
+          {/* Transform Button */}
           <button
-            onClick={handleQuillify}
+            onClick={handleTransform}
             disabled={!inputText.trim() || credits <= 0 || isGenerating}
             className="w-full bg-[#A855F7] hover:bg-[#9333EA] disabled:bg-[#27272A] disabled:text-[#A1A1AA] text-white py-4 rounded-lg font-semibold text-lg transition-all duration-200 hover:scale-105 disabled:hover:scale-100 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
           >
             {isGenerating ? (
               <>
                 <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
-                <span>Quillifying...</span>
+                <span>Transforming...</span>
               </>
             ) : (
               <>
                 <Sparkles className="w-5 h-5" />
-                <span>Quillify</span>
+                <span>Transform</span>
               </>
             )}
           </button>

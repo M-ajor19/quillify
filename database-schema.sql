@@ -1,4 +1,4 @@
--- Quillify Database Schema
+-- Continuum Database Schema
 -- Run this in your Supabase SQL editor
 
 -- Enable Row Level Security
