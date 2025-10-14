@@ -6,7 +6,7 @@ export default function PricingSection() {
       name: "Free",
       price: "$0",
       period: "",
-      description: "Perfect for trying out Quillify",
+      description: "Perfect for trying out Continuum",
       features: ["2-3 Free Credits", "Access to all core features"],
       cta: "Get Started",
       highlighted: false,

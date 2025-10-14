@@ -6,7 +6,7 @@ interface QuillifyLogoProps {
 
 export function QuillifyLogo({ className = "w-8 h-8" }: QuillifyLogoProps) {
   return (
-    <div className={`${className} relative`}>
+    <div className={`${className} relative`} aria-label="Continuum Logo">
       <svg
         viewBox="0 0 32 32"
         fill="none"

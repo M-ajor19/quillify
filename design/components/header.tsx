@@ -4,7 +4,7 @@ export default function Header() {
   return (
     <header className="relative z-20 flex items-center justify-between p-6">
       <div className="flex items-center">
-        <div className="text-2xl font-medium text-white">Quillify</div>
+        <div className="text-2xl font-medium text-white">Continuum</div>
       </div>
 
       <nav className="flex items-center space-x-2">
@@ -33,7 +33,7 @@ export default function Header() {
           Log In
         </button>
         <button className="px-6 py-2 rounded-full bg-primary text-white font-medium text-sm transition-all duration-300 hover:bg-primary/90 purple-glow-hover">
-          Get Started
+          Launch Studio
         </button>
       </div>
     </header>
