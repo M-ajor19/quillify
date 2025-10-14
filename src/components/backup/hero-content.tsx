@@ -24,7 +24,7 @@ export default function HeroContent() {
 
 {/* Description */}
 <p className="text-lg font-light text-white/70 mb-6 leading-relaxed">
-  Feed Quillify your messiest notes, screenshots, and reviews. Our specialist AI distills them into clear, powerful, and perfectly crafted content ready for any platform.
+  Feed Continuum your messiest notes, screenshots, and reviews. Our specialist AI distills them into clear, powerful, and perfectly crafted content ready for any platform.
 </p>
 
         {/* Description */}

@@ -21,7 +21,7 @@ const instrumentSerif = Instrument_Serif({
 })
 
 export const metadata: Metadata = {
-  title: "Quillify - Chaos into Clarity",
+  title: "Continuum - Chaos into Clarity",
   description: "Transform your content chaos into perfect clarity, instantly.",
   generator: "v0.app",
 }
