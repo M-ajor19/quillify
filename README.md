@@ -1,21 +1,17 @@
-# Quillify - AI-Powered Social Proof Content Generator 🚀
+# Continuum - Adaptive Brand Voice Infrastructure 🚀
 
-Transform raw customer feedback into polished social proof content in seconds. Quillify leverages the latest **GPT-5** AI technology to automate the entire workflow from raw input to ready-to-use marketing content.
+Continuum is an intelligent infrastructure for your brand's voice. It's an adaptive written-content engine designed to remember, learn, and build with you—solving the biggest problem in the AI content era: inconsistency and lack of personal identity.
 
-![Quillify Banner](https://img.shields.io/badge/Powered%20by-GPT--5-blue?style=for-the-badge&logo=openai)
+![Continuum Banner](https://img.shields.io/badge/Powered%20by-GPT--5-blue?style=for-the-badge&logo=openai)
 ![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)
 
-## ✨ Features
+## ✨ Why Continuum
 
-- **🤖 GPT-5 Powered**: Latest OpenAI technology for superior content generation
-- **📱 Multi-Format Support**: Twitter posts, LinkedIn content, quote graphics, testimonials, and review snippets
-- **👁️ Smart OCR**: Extract text from images using GPT-5 Vision capabilities
-- **🎭 Dynamic Tone Control**: Professional, enthusiastic, witty, conversational, or authoritative
-- **⚡ Multi-Stage AI Pipeline**: Sophisticated prompt engineering for consistent, high-quality results
-- **🎨 Quote Graphics**: Generate beautiful, shareable quote graphics automatically
-- **🔄 One-Click Generation**: Transform raw feedback into 3 variations of polished content
-- **📊 Real-time Processing**: Fast, responsive AI-powered content transformation
+- **Adaptive Memory**: Learns your brand voice, style, products, and audience over time
+- **Continuity by Design**: Remembers recent context for session-aware generations
+- **Studio Workflows**: Opinionated “recipes” for high-quality outputs from messy inputs
+- **Omnichannel Ready**: Creates platform-specific variations with consistent voice
 
 ## 🚀 Quick Start
 
@@ -27,8 +23,8 @@ Transform raw customer feedback into polished social proof content in seconds. Q
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/M-ajor19/quillify-app.git
-   cd quillify-app
+   git clone https://github.com/your-org/continuum.git
+   cd continuum
    ```
 
 2. **Install dependencies**
@@ -55,14 +51,33 @@ Transform raw customer feedback into polished social proof content in seconds. Q
 5. **Open your browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
-## 🧠 How It Works
+## 🧠 Continuum: Functional & Feature Summary
 
-### The GPT-5 Multi-Stage Pipeline
+### 1) High-Level Philosophy
+Continuum is an intelligent infrastructure for your brand's voice. While other tools generate isolated words, Continuum builds living systems of knowledge and communication for your brand.
 
-1. **📝 Input Analysis**: Raw text is cleaned and analyzed using GPT-5 to extract key information
-2. **🎯 Dynamic Prompt Assembly**: Context-aware prompts are built based on tone and format preferences
-3. **🤖 AI Generation**: GPT-5 creates multiple variations of polished, engaging content
-4. **✅ Output Validation**: Content is validated and formatted for the target platform
+### 2) Core Differentiator: Adaptive Memory
+Continuum learns your brand voice, writing style, key products, and audience context over time, so outputs get progressively more aligned.
+
+### 3) The Five Architectural Layers
+- **Continuum Core (The Memory Brain)**: Secure database and logic for brand voice, stylistic patterns, past content, and performance signals.
+- **Continuum Studio (The Creative Workbench)**: The user-facing application (`app.continuum.app`) where teams create, edit, and manage content.
+- **Continuum Atlas (The Knowledge Weave)**: Integrations that pull learning signals from X, LinkedIn, and blogs.
+- **Continuum Pulse (The Perception Engine)**: Analytics on audience reactions feeding improvements back to Core.
+- **Continuum Sync (The Omnichannel Bridge)**: One-click publishing with channel-appropriate adaptation.
+
+### 4) Key User-Facing Features (Roadmap)
+- **Phase 1 (MVP)**:
+  - Brand Kit (Core v1): tone, products, audience
+  - Contextual Memory: remembers last 5–10 generations per session
+  - Specialized Recipes: transform messy inputs into polished outputs
+- **Phase 2 (Multiplier)**:
+  - Browser Extension (Studio Everywhere)
+  - Platform Integration (Atlas v1): connect X to learn brand voice
+- **Phase 3 & 4 (Ecosystem)**:
+  - Team Collaboration: shared Brand Kits and workflows
+  - Performance Insights (Pulse v1)
+  - Direct Publishing (Sync v1)
 
 ### Supported Input Types
 
@@ -74,7 +89,7 @@ Transform raw customer feedback into polished social proof content in seconds. Q
 
 | Format | Description | Character Limit |
 |--------|-------------|-----------------|
-| **🐦 Twitter Post** | 280-character optimized posts | 280 chars |
+| **🐦 X Post** | 280-character optimized posts | 280 chars |
 | **💼 LinkedIn Post** | Professional, detailed content with hashtags | 700 chars |
 | **🎨 Quote Graphic** | Visual, shareable quote images | Flexible |
 | **⭐ Testimonial** | Full testimonial format | Flexible |
@@ -232,8 +247,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🆘 Support
 
 - **Documentation**: Check this README and inline code comments
-- **Issues**: [GitHub Issues](https://github.com/M-ajor19/quillify-app/issues)
-- **Email**: support@quillify.tech
+- **Issues**: [GitHub Issues](https://github.com/your-org/continuum/issues)
+- **Email**: support@continuum.app
 
 ## 🙏 Acknowledgments
 

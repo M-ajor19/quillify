@@ -4,7 +4,7 @@ export default function Header() {
   return (
     <header className="relative z-20 flex items-center justify-between p-6">
       <div className="flex items-center">
-        <div className="text-2xl font-medium text-white">Quillify</div>
+        <div className="text-2xl font-medium text-white">Continuum</div>
       </div>
 
       <nav className="flex items-center space-x-2">

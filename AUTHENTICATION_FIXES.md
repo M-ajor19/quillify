@@ -81,7 +81,7 @@ EMAIL_SERVER_HOST=smtp.resend.com
 EMAIL_SERVER_PORT=465
 EMAIL_SERVER_USER=resend
 EMAIL_SERVER_PASSWORD=your_resend_api_key
-EMAIL_FROM=Quillify <noreply@quillify.app>
+EMAIL_FROM=Continuum <noreply@continuum.app>
 ```
 
 ### **NextAuth:**
