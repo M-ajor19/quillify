@@ -1,6 +1,6 @@
 "use client"
 
-import ContinuumLogo from "./continuum-logo"
+import ContinuumLogo from "../continuum-logo"
 
 export default function Header() {
   return (
