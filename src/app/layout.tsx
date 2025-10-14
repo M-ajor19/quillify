@@ -4,7 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Providers } from "@/components/Providers";
 
 export const metadata: Metadata = {
-  title: "Quillify - Transform Feedback into Social Proof",
+  title: "Continuum - Adaptive Written-Content Engine",
   description: "Turn customer reviews, testimonials, and feedback into polished, engaging social media content that builds trust and drives conversions.",
 };
 
