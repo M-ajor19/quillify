@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-// Suggested change for: /Users/majormarik/Desktop/Quillify/design/next.config.mjs
+// Continuum Next.js Configuration
 const nextConfig = {
   images: {
     unoptimized: true,

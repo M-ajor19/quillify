@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { signOut } from 'next-auth/react';
-import { QuillifyLogo } from './QuillifyLogo';
+import { ContinuumLogo } from './ContinuumLogo';
 import { ChevronDown, User, Settings, LogOut, Coins } from 'lucide-react';
 
 interface NavbarProps {
@@ -19,8 +19,8 @@ export function Navbar({ credits, onBuyCredits, onDashboard, showDashboard }: Na
         <div className="flex items-center justify-between">
           {/* Left - Logo */}
           <div className="flex items-center space-x-3">
-            <QuillifyLogo className="w-8 h-8" />
-            <span className="text-xl font-semibold text-[#F5F5F7]">Quillify</span>
+            <ContinuumLogo className="w-8 h-8" />
+            <span className="text-xl font-semibold text-[#F5F5F7]">Continuum</span>
           </div>
 
           {/* Right - Controls */}

@@ -1,11 +1,11 @@
 "use client"
 
-import QuillifyLogo from "./quillify-logo"
+import ContinuumLogo from "../continuum-logo"
 
 export default function Header() {
   return (
     <header className="relative z-20 flex items-center justify-between p-6">
-      <QuillifyLogo size={40} />
+      <ContinuumLogo size={40} />
 
       {/* Navigation */}
       <nav className="flex items-center space-x-2">
