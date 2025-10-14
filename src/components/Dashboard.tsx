@@ -21,10 +21,10 @@ export function Dashboard({ credits, onStartGeneration, onBuyCredits }: Dashboar
         {/* Header */}
         <div className="mb-12">
           <h1 className="text-3xl md:text-4xl font-semibold text-[#F5F5F7] mb-4">
-            Your Alchemy Dashboard
+            Your Continuum Dashboard
           </h1>
           <p className="text-lg text-[#A1A1AA]">
-            Ready to transform your content? Your digital workshop awaits.
+            Your adaptive content engine is ready. Let's build your brand's voice together.
           </p>
         </div>
 
@@ -36,10 +36,10 @@ export function Dashboard({ credits, onStartGeneration, onBuyCredits }: Dashboar
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="text-2xl font-semibold text-[#F5F5F7] mb-3">
-                    Start a New Generation
+                    Create New Content
                   </h3>
                   <p className="text-[#A1A1AA] mb-6">
-                    Transform your raw content into something extraordinary. The alchemy station is ready.
+                    Transform your raw content with Continuum's adaptive memory. Your brand voice evolves with every generation.
                   </p>
                   <button
                     onClick={onStartGeneration}
