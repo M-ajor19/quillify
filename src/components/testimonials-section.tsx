@@ -3,7 +3,7 @@
 export default function TestimonialsSection() {
   const testimonials = [
     {
-      quote: "Quillify transformed our content workflow completely. What used to take hours now takes minutes.",
+      quote: "Continuum transformed our content workflow completely. What used to take hours now takes minutes.",
       name: "Sarah Chen",
       title: "Marketing Manager",
     },

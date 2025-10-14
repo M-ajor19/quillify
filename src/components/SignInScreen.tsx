@@ -38,7 +38,7 @@ export function SignInScreen() {
             <QuillifyLogo className="w-16 h-16" />
           </div>
           <h1 className="text-4xl font-semibold text-[#F5F5F7] mb-4">
-            Welcome to Quillify
+            Welcome to Continuum
           </h1>
           <p className="text-lg text-[#A1A1AA]">
             Transform your raw content into polished, professional pieces with the power of digital alchemy.

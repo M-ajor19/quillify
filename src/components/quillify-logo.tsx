@@ -6,7 +6,7 @@ interface QuillifyLogoProps {
 
 const QuillifyLogo = ({ size = 150 }: QuillifyLogoProps) => {
   return (
-    <svg width={size} height={size} viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="Quillify Logo">
+    <svg width={size} height={size} viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="Continuum Logo">
       <defs>
         <linearGradient id="quillify-purple-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" style={{ stopColor: "#c084fc" }} />
