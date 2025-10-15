@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { signIn } from 'next-auth/react';
-import { QuillifyLogo } from './QuillifyLogo';
+import { ContinuumLogo } from './ContinuumLogo';
 import { Github, Chrome, Linkedin, Mail, Loader } from 'lucide-react';
 
 export function SignInScreen() {
@@ -35,13 +35,13 @@ export function SignInScreen() {
         {/* Logo and Title */}
         <div className="text-center mb-12">
           <div className="flex justify-center mb-6">
-            <QuillifyLogo className="w-16 h-16" />
+            <ContinuumLogo className="w-16 h-16" />
           </div>
           <h1 className="text-4xl font-semibold text-[#F5F5F7] mb-4">
-            Welcome to Quillify
+            Welcome to Continuum
           </h1>
           <p className="text-lg text-[#A1A1AA]">
-            Transform your raw content into polished, professional pieces with the power of digital alchemy.
+            Your adaptive brand voice engine that learns, remembers, and builds with you.
           </p>
         </div>
 

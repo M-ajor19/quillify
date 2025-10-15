@@ -101,11 +101,11 @@ export function AlchemyStation({ credits = 3, onGenerate, onCreditsUsed, isOnboa
     <div className="max-w-7xl mx-auto px-6">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 min-h-[600px]">
         
-        {/* Left Panel - The Cauldron */}
+        {/* Left Panel - The Memory Core */}
         <div className="bg-[#18181B] border border-[#27272A] rounded-xl p-6">
           <div className="mb-6">
-            <h2 className="text-xl font-semibold text-[#F5F5F7] mb-2">The Cauldron</h2>
-            <p className="text-sm text-[#A1A1AA]">Add your raw ingredients</p>
+            <h2 className="text-xl font-semibold text-[#F5F5F7] mb-2">Memory Core</h2>
+            <p className="text-sm text-[#A1A1AA]">Input your raw content for adaptive processing</p>
           </div>
 
           {/* Input Area */}
@@ -162,7 +162,7 @@ export function AlchemyStation({ credits = 3, onGenerate, onCreditsUsed, isOnboa
             </div>
           </div>
 
-          {/* Quillify Button */}
+          {/* Continuum Button */}
           <button
             onClick={handleQuillify}
             disabled={!inputText.trim() || credits <= 0 || isGenerating}
@@ -171,12 +171,12 @@ export function AlchemyStation({ credits = 3, onGenerate, onCreditsUsed, isOnboa
             {isGenerating ? (
               <>
                 <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
-                <span>Quillifying...</span>
+                <span>Adapting...</span>
               </>
             ) : (
               <>
                 <Sparkles className="w-5 h-5" />
-                <span>Quillify</span>
+                <span>Adapt</span>
               </>
             )}
           </button>

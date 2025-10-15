@@ -1,21 +1,21 @@
-# Quillify - AI-Powered Social Proof Content Generator 🚀
+# Continuum - Adaptive Brand Voice Engine 🚀
 
-Transform raw customer feedback into polished social proof content in seconds. Quillify leverages the latest **GPT-5** AI technology to automate the entire workflow from raw input to ready-to-use marketing content.
+An intelligent infrastructure for your brand's voice. Continuum is an adaptive written-content engine designed to remember, learn, and build with you. Transform raw content into consistent, personalized brand communications that grow smarter over time.
 
-![Quillify Banner](https://img.shields.io/badge/Powered%20by-GPT--5-blue?style=for-the-badge&logo=openai)
+![Continuum Banner](https://img.shields.io/badge/Powered%20by-Adaptive%20AI-blue?style=for-the-badge&logo=openai)
 ![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)
 
 ## ✨ Features
 
-- **🤖 GPT-5 Powered**: Latest OpenAI technology for superior content generation
+- **🧠 Adaptive Memory**: Learns your brand voice, style, and preferences over time
+- **🎯 Brand Consistency**: Ensures every piece of content aligns with your unique identity
 - **📱 Multi-Format Support**: Twitter posts, LinkedIn content, quote graphics, testimonials, and review snippets
-- **👁️ Smart OCR**: Extract text from images using GPT-5 Vision capabilities
+- **👁️ Smart OCR**: Extract text from images using advanced vision capabilities
 - **🎭 Dynamic Tone Control**: Professional, enthusiastic, witty, conversational, or authoritative
 - **⚡ Multi-Stage AI Pipeline**: Sophisticated prompt engineering for consistent, high-quality results
-- **🎨 Quote Graphics**: Generate beautiful, shareable quote graphics automatically
-- **🔄 One-Click Generation**: Transform raw feedback into 3 variations of polished content
-- **📊 Real-time Processing**: Fast, responsive AI-powered content transformation
+- **🔄 Contextual Memory**: Remembers your last 5-10 generations for session continuity
+- **📊 Performance Learning**: Analyzes what works to improve future generations
 
 ## 🚀 Quick Start
 
