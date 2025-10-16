@@ -11,6 +11,8 @@ const getOpenAI = () => {
   }
   return new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
+    timeout: 60000, // 60 second timeout for AI operations
+    maxRetries: 2,
   });
 };
 
@@ -41,7 +43,32 @@ Focus on identifying the most valuable and shareable aspects of the feedback.
       temperature: 0.1,
     });
 
-    return JSON.parse(response.choices[0].message.content || '{}');
+    // FIXED: Safe JSON parsing with validation
+    try {
+      const parsed = JSON.parse(response.choices[0].message.content || '{}');
+      
+      // Validate structure
+      if (typeof parsed === 'object' && parsed !== null) {
+        return {
+          sentiment: parsed.sentiment || "positive",
+          coreMessage: parsed.coreMessage || inputText,
+          quantifiableResults: Array.isArray(parsed.quantifiableResults) ? parsed.quantifiableResults : [],
+          emotionalBenefits: Array.isArray(parsed.emotionalBenefits) ? parsed.emotionalBenefits : [],
+          cleanedText: parsed.cleanedText || inputText
+        };
+      }
+      throw new Error('Invalid analysis structure');
+    } catch (parseError) {
+      console.error('Error parsing AI response:', parseError);
+      // Return fallback structure
+      return {
+        sentiment: "positive",
+        coreMessage: inputText,
+        quantifiableResults: [],
+        emotionalBenefits: [],
+        cleanedText: inputText
+      };
+    }
   } catch (error) {
     console.error('Error in input analysis:', error);
     return {

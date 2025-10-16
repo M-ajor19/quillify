@@ -5,10 +5,11 @@ interface AlchemyStationProps {
   credits?: number;
   onGenerate?: () => void;
   onCreditsUsed?: () => void;
+  onCreditsUpdate?: (newCredits: number) => void;
   isOnboarding?: boolean;
 }
 
-export function AlchemyStation({ credits = 3, onGenerate, onCreditsUsed, isOnboarding = false }: AlchemyStationProps) {
+export function AlchemyStation({ credits = 3, onGenerate, onCreditsUsed, onCreditsUpdate, isOnboarding = false }: AlchemyStationProps) {
   const [inputText, setInputText] = useState('');
   const [outputType, setOutputType] = useState('social-post');
   const [tone, setTone] = useState('professional');
@@ -68,6 +69,16 @@ export function AlchemyStation({ credits = 3, onGenerate, onCreditsUsed, isOnboa
       if (data.content && data.content.length > 0) {
         setGeneratedContent(data.content[0]); // Use first generated content
         setShowResult(true);
+        
+        // FIXED: Sync credits from server response
+        if (data.creditsRemaining !== undefined && onCreditsUpdate) {
+          onCreditsUpdate(data.creditsRemaining);
+        } else if (onCreditsUsed) {
+          // Fallback to local deduction if server doesn't return credits
+          onCreditsUsed();
+        }
+        
+        if (onGenerate && isOnboarding) onGenerate();
       } else {
         throw new Error('No content generated');
       }
@@ -75,11 +86,9 @@ export function AlchemyStation({ credits = 3, onGenerate, onCreditsUsed, isOnboa
       console.error('Error generating content:', error);
       setGeneratedContent('Sorry, there was an error generating content. Please try again.');
       setShowResult(true);
+      // FIXED: Don't deduct credits on error
     } finally {
       setIsGenerating(false);
-      
-      if (onCreditsUsed) onCreditsUsed();
-      if (onGenerate && isOnboarding) onGenerate();
     }
   };
 

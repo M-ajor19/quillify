@@ -25,6 +25,29 @@ export default function Home() {
     }
   }, [session]);
 
+  // Handle Stripe payment success/cancel
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    
+    if (params.get('success') === 'true') {
+      // Payment successful - refresh session to get new credits
+      setCurrentScreen('dashboard');
+      // TODO: Show success toast notification
+      
+      // Clean URL
+      window.history.replaceState({}, '', '/studio');
+    }
+    
+    if (params.get('canceled') === 'true') {
+      // Payment canceled
+      setShowPurchaseModal(false);
+      // TODO: Show canceled message
+      
+      // Clean URL
+      window.history.replaceState({}, '', '/studio');
+    }
+  }, []);
+
   const handleGenerate = () => {
     setCurrentScreen('alchemy');
     setIsFirstRun(false);
@@ -86,6 +109,7 @@ export default function Home() {
           <AlchemyStation 
             credits={credits}
             onCreditsUsed={() => setCredits(prev => Math.max(0, prev - 1))}
+            onCreditsUpdate={(newCredits) => setCredits(newCredits)}
           />
         )}
       </main>

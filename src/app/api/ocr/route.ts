@@ -10,6 +10,8 @@ const getOpenAI = () => {
   }
   return new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
+    timeout: 60000, // 60 second timeout for vision operations
+    maxRetries: 2,
   });
 };
 
