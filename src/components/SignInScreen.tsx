@@ -51,7 +51,7 @@ export function SignInScreen() {
             <div className="space-y-3">
               <button
                 onClick={() => signIn('google')}
-                className="w-full bg-white hover:bg-gray-50 text-gray-900 py-4 px-6 rounded-lg font-medium transition-all duration-200 hover:scale-105 flex items-center justify-center space-x-3"
+                className="w-full bg-white/10 hover:bg-white hover:text-black text-white py-4 px-6 rounded-lg font-medium transition-all duration-300 flex items-center justify-center space-x-3 border border-white/20"
               >
                 <Chrome className="w-5 h-5" />
                 <span>Continue with Google</span>

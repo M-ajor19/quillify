@@ -167,6 +167,7 @@ const SupabaseAdapter = {
 }
 
 export const authOptions: NextAuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
   adapter: SupabaseAdapter as any,
   providers: [
     GoogleProvider({
@@ -232,9 +233,9 @@ export const authOptions: NextAuthOptions = {
     },
   },
   pages: {
-    signIn: '/',
-    error: '/',
-    verifyRequest: '/',
+    signIn: '/studio',
+    error: '/studio',
+    verifyRequest: '/studio',
   },
   session: {
     strategy: 'database',

@@ -38,8 +38,8 @@ export async function POST(request: NextRequest) {
         },
       ],
       mode: 'payment',
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard?success=true`,
-      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard?canceled=true`,
+      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/studio?success=true`,
+      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/studio?canceled=true`,
       metadata: {
         userId: session.user.id,
         credits: creditPackage.credits.toString(),

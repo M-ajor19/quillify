@@ -91,7 +91,7 @@ export function AlchemyStation({ credits = 3, onGenerate, onCreditsUsed, isOnboa
     const element = document.createElement('a');
     const file = new Blob([generatedContent], { type: 'text/plain' });
     element.href = URL.createObjectURL(file);
-    element.download = `quillify-${outputType}-${Date.now()}.txt`;
+    element.download = `continuum-${outputType}-${Date.now()}.txt`;
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
