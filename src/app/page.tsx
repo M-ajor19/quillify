@@ -46,10 +46,10 @@ export default function Home() {
   // Show loading state while checking authentication
   if (status === 'loading') {
     return (
-      <div className="min-h-screen bg-[#101014] text-[#F5F5F7] font-['Inter',sans-serif] flex items-center justify-center">
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#A855F7] mx-auto mb-4"></div>
-          <p className="text-[#A1A1AA]">Loading...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+          <p className="text-white/70">Loading...</p>
         </div>
       </div>
     );
@@ -61,7 +61,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-[#101014] text-[#F5F5F7] font-['Inter',sans-serif]">
+    <div className="min-h-screen bg-black text-white">
       <Navbar 
         credits={credits}
         onBuyCredits={handleBuyCredits}

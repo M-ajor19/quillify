@@ -16,7 +16,7 @@ export function Dashboard({ credits, onStartGeneration, onBuyCredits }: Dashboar
   ];
 
   return (
-    <div className="min-h-screen bg-[#101014] pt-8 pb-12 font-['Inter',sans-serif]">
+    <div className="min-h-screen bg-black pt-8 pb-12">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="mb-12">

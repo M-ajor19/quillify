@@ -7,7 +7,7 @@ interface OnboardingScreenProps {
 
 export function OnboardingScreen({ onGenerate }: OnboardingScreenProps) {
   return (
-    <div className="min-h-screen bg-[#101014] pt-8 font-['Inter',sans-serif]">
+    <div className="min-h-screen bg-black pt-8">
       <div className="max-w-7xl mx-auto px-6">
         {/* Welcome Header */}
         <div className="text-center mb-12">

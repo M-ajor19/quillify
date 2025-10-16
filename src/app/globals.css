@@ -38,9 +38,8 @@
   --sidebar-accent-foreground: rgba(255, 255, 255, 0.7); /* Dimmed text on sidebar accent */
   --sidebar-border: rgba(255, 255, 255, 0.2); /* Subtle sidebar borders */
   --sidebar-ring: rgba(255, 255, 255, 0.5); /* White for sidebar focus */
-  --font-instrument-serif: "Instrument Serif", serif; /* Instrument Serif font family configuration */
-  /* Added Figtree as the primary font variable */
-  --font-figtree: "Figtree", sans-serif; /* Figtree font family configuration */
+  --font-mono: "JetBrains Mono", "SF Mono", "Monaco", "Consolas", monospace;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .dark {
@@ -77,21 +76,33 @@
   --sidebar-accent-foreground: rgba(255, 255, 255, 0.7);
   --sidebar-border: rgba(255, 255, 255, 0.2);
   --sidebar-ring: rgba(255, 255, 255, 0.5);
-  --font-instrument-serif: "Instrument Serif", serif;
-  --font-figtree: "Figtree", sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", "Monaco", "Consolas", monospace;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* Custom font imports */
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Figtree:wght@300;400;500;600;700&display=swap');
+/* Custom font imports - Hybrid system for Intelligent Architecture */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   body {
-    font-family: var(--font-figtree);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     background-color: var(--background);
     color: var(--foreground);
   }
+  
+  /* Monospaced font for headings - architectural precision */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Consolas', monospace;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
 }
 
-.instrument {
-  font-family: var(--font-instrument-serif);
+/* Utility classes for font control */
+.font-mono {
+  font-family: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Consolas', monospace;
+}
+
+.font-sans {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }

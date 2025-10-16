@@ -30,7 +30,7 @@ export function SignInScreen() {
   };
 
   return (
-    <div className="min-h-screen bg-[#101014] text-[#F5F5F7] font-['Inter',sans-serif] flex items-center justify-center">
+    <div className="min-h-screen bg-black text-white flex items-center justify-center">
       <div className="max-w-md w-full mx-6">
         {/* Logo and Title */}
         <div className="text-center mb-12">
