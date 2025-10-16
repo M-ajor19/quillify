@@ -4,82 +4,81 @@
 @import "tw-animate-css";
 
 :root {
-  /* Updated color tokens to match dramatic lighting design brief */
+  /* Monochrome design system - Intelligent Architecture aesthetic */
   --background: #000000; /* Pure black background */
-  --foreground: oklch(1 0 0); /* Pure white for text and highlights */
-  --card: oklch(0.95 0 0); /* Light gray for subtle backgrounds */
-  --card-foreground: oklch(0 0 0); /* Black text on light cards */
-  --popover: oklch(1 0 0); /* White for popover backgrounds */
-  --popover-foreground: oklch(0 0 0); /* Black text in popovers */
-  --primary: rgb(25, 22, 211); /* Violet accent for highlights */
-  --primary-foreground: oklch(1 0 0); /* White text on violet */
-  --secondary: oklch(0.95 0 0); /* Light gray for secondary elements */
-  --secondary-foreground: oklch(0 0 0); /* Black text on secondary */
-  --muted: oklch(0.25 0 0); /* Dark gray for muted elements */
-  --muted-foreground: oklch(0.95 0 0); /* Light gray text for muted */
-  --accent: oklch(0.65 0.2 270); /* Violet for interactive elements */
-  --accent-foreground: oklch(1 0 0); /* White text on accent */
-  --destructive: oklch(0.6 0.2 40); /* Amber for destructive actions */
-  --destructive-foreground: oklch(1 0 0); /* White text for destructive */
-  --border: oklch(1 0 0); /* White borders for contrast */
-  --input: oklch(0.95 0 0); /* Light gray for inputs */
-  --ring: oklch(0.65 0.2 270); /* Violet for focus rings */
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
+  --foreground: #FFFFFF; /* Pure white text */
+  --card: rgba(255, 255, 255, 0.05); /* Subtle white card background */
+  --card-foreground: #FFFFFF; /* White text on cards */
+  --popover: rgba(255, 255, 255, 0.1); /* Slightly elevated white */
+  --popover-foreground: #FFFFFF; /* White text in popovers */
+  --primary: #FFFFFF; /* White for primary actions */
+  --primary-foreground: #000000; /* Black text on white */
+  --secondary: rgba(255, 255, 255, 0.1); /* Subtle white for secondary */
+  --secondary-foreground: #FFFFFF; /* White text on secondary */
+  --muted: rgba(255, 255, 255, 0.05); /* Very subtle white for muted */
+  --muted-foreground: rgba(255, 255, 255, 0.4); /* Dimmed white text */
+  --accent: rgba(255, 255, 255, 0.9); /* Bright white for accents */
+  --accent-foreground: #000000; /* Black text on accent */
+  --destructive: rgba(255, 255, 255, 0.15); /* Subtle for destructive */
+  --destructive-foreground: #FFFFFF; /* White text for destructive */
+  --border: rgba(255, 255, 255, 0.2); /* Subtle white borders */
+  --input: rgba(255, 255, 255, 0.05); /* Subtle input backgrounds */
+  --ring: rgba(255, 255, 255, 0.5); /* White focus rings */
+  --chart-1: rgba(255, 255, 255, 0.9);
+  --chart-2: rgba(255, 255, 255, 0.7);
+  --chart-3: rgba(255, 255, 255, 0.5);
+  --chart-4: rgba(255, 255, 255, 0.3);
+  --chart-5: rgba(255, 255, 255, 0.1);
   --radius: 0.5rem; /* Softer rounded corners */
-  --sidebar: oklch(0 0 0); /* Black sidebar */
-  --sidebar-foreground: oklch(1 0 0); /* White sidebar text */
-  --sidebar-primary: oklch(0.65 0 0); /* Violet for primary sidebar */
-  --sidebar-primary-foreground: oklch(1 0 0); /* White text on sidebar primary */
-  --sidebar-accent: oklch(0.95 0 0); /* Light gray for sidebar accent */
-  --sidebar-accent-foreground: oklch(0 0 0); /* Black text on sidebar accent */
-  --sidebar-border: oklch(1 0 0); /* White sidebar borders */
-  --sidebar-ring: rgb(89, 113, 210); /* Violet for sidebar focus */
+  --sidebar: #000000; /* Black sidebar */
+  --sidebar-foreground: #FFFFFF; /* White sidebar text */
+  --sidebar-primary: rgba(255, 255, 255, 0.1); /* Subtle white for primary sidebar */
+  --sidebar-primary-foreground: #FFFFFF; /* White text on sidebar primary */
+  --sidebar-accent: rgba(255, 255, 255, 0.05); /* Very subtle for sidebar accent */
+  --sidebar-accent-foreground: rgba(255, 255, 255, 0.7); /* Dimmed text on sidebar accent */
+  --sidebar-border: rgba(255, 255, 255, 0.2); /* Subtle sidebar borders */
+  --sidebar-ring: rgba(255, 255, 255, 0.5); /* White for sidebar focus */
   --font-instrument-serif: "Instrument Serif", serif; /* Instrument Serif font family configuration */
   /* Added Figtree as the primary font variable */
   --font-figtree: "Figtree", sans-serif; /* Figtree font family configuration */
 }
 
 .dark {
-  /* Dark mode maintains the same dramatic black background theme */
+  /* Dark mode uses same monochrome system */
   --background: #000000;
-  --foreground: oklch(1 0 0);
-  --card: oklch(0.1 0 0);
-  --card-foreground: oklch(1 0 0);
-  --popover: oklch(0.1 0 0);
-  --popover-foreground: oklch(1 0 0);
-  --primary: oklch(0.7 0.25 270);
-  --primary-foreground: oklch(0 0 0);
-  --secondary: oklch(0.15 0 0);
-  --secondary-foreground: oklch(1 0 0);
-  --muted: oklch(0.15 0 0);
-  --muted-foreground: oklch(0.7 0 0);
-  --accent: oklch(0.7 0.25 270);
-  --accent-foreground: oklch(0 0 0);
-  --destructive: oklch(0.5 0.2 40);
-  --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.3 0 0);
-  --input: oklch(0.15 0 0);
-  --ring: oklch(0.7 0.25 270);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.05 0 0);
-  --sidebar-foreground: oklch(1 0 0);
-  --sidebar-primary: oklch(0.7 0.25 270);
-  --sidebar-primary-foreground: oklch(0 0 0);
-  --sidebar-accent: oklch(0.15 0 0);
-  --sidebar-accent-foreground: oklch(1 0 0);
-  --sidebar-border: oklch(0.3 0 0);
-  --sidebar-ring: oklch(0.7 0.25 270);
-  --font-instrument-serif: "Instrument Serif", serif; /* Instrument Serif font family configuration */
-  /* Added Figtree font variable for dark mode consistency */
-  --font-figtree: "Figtree", sans-serif; /* Figtree font family configuration */
+  --foreground: #FFFFFF;
+  --card: rgba(255, 255, 255, 0.05);
+  --card-foreground: #FFFFFF;
+  --popover: rgba(255, 255, 255, 0.1);
+  --popover-foreground: #FFFFFF;
+  --primary: #FFFFFF;
+  --primary-foreground: #000000;
+  --secondary: rgba(255, 255, 255, 0.1);
+  --secondary-foreground: #FFFFFF;
+  --muted: rgba(255, 255, 255, 0.05);
+  --muted-foreground: rgba(255, 255, 255, 0.4);
+  --accent: rgba(255, 255, 255, 0.9);
+  --accent-foreground: #000000;
+  --destructive: rgba(255, 255, 255, 0.15);
+  --destructive-foreground: #FFFFFF;
+  --border: rgba(255, 255, 255, 0.2);
+  --input: rgba(255, 255, 255, 0.05);
+  --ring: rgba(255, 255, 255, 0.5);
+  --chart-1: rgba(255, 255, 255, 0.9);
+  --chart-2: rgba(255, 255, 255, 0.7);
+  --chart-3: rgba(255, 255, 255, 0.5);
+  --chart-4: rgba(255, 255, 255, 0.3);
+  --chart-5: rgba(255, 255, 255, 0.1);
+  --sidebar: #000000;
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-primary: rgba(255, 255, 255, 0.1);
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: rgba(255, 255, 255, 0.05);
+  --sidebar-accent-foreground: rgba(255, 255, 255, 0.7);
+  --sidebar-border: rgba(255, 255, 255, 0.2);
+  --sidebar-ring: rgba(255, 255, 255, 0.5);
+  --font-instrument-serif: "Instrument Serif", serif;
+  --font-figtree: "Figtree", sans-serif;
 }
 
 /* Custom font imports */

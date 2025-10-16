@@ -4,8 +4,8 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Providers } from "@/components/Providers";
 
 export const metadata: Metadata = {
-  title: "Continuum - Adaptive Brand Voice Engine",
-  description: "An intelligent infrastructure for your brand's voice. Adaptive memory that learns, remembers, and builds with you to create consistent, personalized content across all channels.",
+  title: "Continuum - Coherence, Engineered",
+  description: "Intelligent infrastructure for your brand's communication. A learning system that analyzes your history, understands your voice, and engineers consistently coherent content across all platforms.",
 };
 
 export default function RootLayout({

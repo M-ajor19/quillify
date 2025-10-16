@@ -2,9 +2,10 @@ import React from 'react';
 
 interface ContinuumLogoProps {
   className?: string;
+  size?: number;
 }
 
-export function ContinuumLogo({ className = "w-8 h-8" }: ContinuumLogoProps) {
+export function ContinuumLogo({ className = "w-8 h-8", size }: ContinuumLogoProps) {
   return (
     <div className={`${className} relative`}>
       <svg
@@ -12,37 +13,46 @@ export function ContinuumLogo({ className = "w-8 h-8" }: ContinuumLogoProps) {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full"
+        style={size ? { width: size, height: size } : undefined}
       >
-        {/* Continuum Wave */}
+        {/* Continuum Loop - Geometric C that doesn't fully close */}
         <path
-          d="M4 16C8 8 12 24 16 16C20 8 24 24 28 16"
-          stroke="url(#continuumGradient)"
-          strokeWidth="3"
+          d="M 24 6 A 10 10 0 0 1 24 26"
+          stroke="rgba(255, 255, 255, 0.9)"
+          strokeWidth="2"
+          strokeLinecap="square"
           fill="none"
-          className="animate-pulse"
+          className="transition-opacity duration-300"
         />
         
-        {/* Neural Network Nodes */}
-        <circle cx="8" cy="12" r="2" fill="#A855F7" className="animate-pulse" />
-        <circle cx="16" cy="16" r="2.5" fill="#A855F7" className="animate-pulse" />
-        <circle cx="24" cy="12" r="2" fill="#A855F7" className="animate-pulse" />
-        <circle cx="8" cy="20" r="2" fill="#9333EA" className="animate-pulse" />
-        <circle cx="24" cy="20" r="2" fill="#9333EA" className="animate-pulse" />
+        {/* Inner architectural line for depth */}
+        <path
+          d="M 21 9 A 7 7 0 0 1 21 23"
+          stroke="rgba(255, 255, 255, 0.4)"
+          strokeWidth="1"
+          strokeLinecap="square"
+          fill="none"
+        />
         
-        <defs>
-          <linearGradient
-            id="continuumGradient"
-            x1="4"
-            y1="16"
-            x2="28"
-            y2="16"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="#A855F7" />
-            <stop offset="0.5" stopColor="#9333EA" />
-            <stop offset="1" stopColor="#A855F7" />
-          </linearGradient>
-        </defs>
+        {/* Precision dot at the loop's open end - represents content being perfected */}
+        <circle
+          cx="8"
+          cy="16"
+          r="2"
+          fill="#FFFFFF"
+          className="transition-all duration-300"
+        />
+        
+        {/* Subtle connecting line from dot to loop */}
+        <line
+          x1="10"
+          y1="16"
+          x2="14"
+          y2="16"
+          stroke="rgba(255, 255, 255, 0.3)"
+          strokeWidth="1"
+          strokeLinecap="square"
+        />
       </svg>
     </div>
   );
