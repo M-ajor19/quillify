@@ -1,4 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { rateLimit } from '@/lib/rate-limit';
 import OpenAI from 'openai';
 
 const getOpenAI = () => {
@@ -48,11 +51,50 @@ async function extractTextFromImage(imageBuffer: Buffer): Promise<string> {
 
 export async function POST(request: NextRequest) {
   try {
+    // SECURITY: Check authentication
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    // SECURITY: Rate limiting - 5 OCR requests per minute per user (more expensive operation)
+    const rateLimitResult = rateLimit(`ocr:${session.user.id}`, {
+      interval: 60000, // 1 minute
+      maxRequests: 5
+    });
+
+    if (!rateLimitResult.success) {
+      return NextResponse.json(
+        { 
+          error: 'Rate limit exceeded. Please try again later.',
+          retryAfter: Math.ceil((rateLimitResult.reset - Date.now()) / 1000)
+        },
+        { 
+          status: 429,
+          headers: {
+            'X-RateLimit-Limit': rateLimitResult.limit.toString(),
+            'X-RateLimit-Remaining': rateLimitResult.remaining.toString(),
+            'X-RateLimit-Reset': new Date(rateLimitResult.reset).toISOString(),
+          }
+        }
+      );
+    }
+
     const formData = await request.formData();
     const image = formData.get('image') as File;
     
     if (!image) {
       return NextResponse.json({ error: 'No image provided' }, { status: 400 });
+    }
+
+    // Validate file size (10MB limit)
+    if (image.size > 10 * 1024 * 1024) {
+      return NextResponse.json({ error: 'File too large. Maximum 10MB.' }, { status: 400 });
+    }
+
+    // Validate file type
+    if (!image.type.startsWith('image/')) {
+      return NextResponse.json({ error: 'Invalid file type. Images only.' }, { status: 400 });
     }
 
     // Convert image to buffer

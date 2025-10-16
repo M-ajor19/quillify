@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { supabaseAdmin } from '@/lib/supabase';
+import { rateLimit } from '@/lib/rate-limit';
 import OpenAI from 'openai';
 
 const getOpenAI = () => {
@@ -142,11 +143,39 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    // SECURITY: Rate limiting - 10 requests per minute per user
+    const rateLimitResult = rateLimit(`generate:${session.user.id}`, {
+      interval: 60000, // 1 minute
+      maxRequests: 10
+    });
+
+    if (!rateLimitResult.success) {
+      return NextResponse.json(
+        { 
+          error: 'Rate limit exceeded. Please try again later.',
+          retryAfter: Math.ceil((rateLimitResult.reset - Date.now()) / 1000)
+        },
+        { 
+          status: 429,
+          headers: {
+            'X-RateLimit-Limit': rateLimitResult.limit.toString(),
+            'X-RateLimit-Remaining': rateLimitResult.remaining.toString(),
+            'X-RateLimit-Reset': new Date(rateLimitResult.reset).toISOString(),
+          }
+        }
+      );
+    }
+
     const { inputText, tone, format } = await request.json();
 
     // Validation
     if (!inputText?.trim()) {
       return NextResponse.json({ error: 'Input text is required' }, { status: 400 });
+    }
+
+    // SECURITY: Input length validation (prevent abuse)
+    if (inputText.length > 10000) {
+      return NextResponse.json({ error: 'Input text too long. Maximum 10,000 characters.' }, { status: 400 });
     }
 
     if (!process.env.OPENAI_API_KEY) {
@@ -164,15 +193,18 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid format selected' }, { status: 400 });
     }
 
-    // Check user credits
-    const { data: user } = await supabaseAdmin
-      .from('users')
-      .select('credits')
-      .eq('id', session.user.id)
+    // SECURITY: Atomically deduct credit with row-level locking
+    const { data: creditResult, error: creditError } = await supabaseAdmin
+      .rpc('deduct_credit_if_available', {
+        p_user_id: session.user.id,
+        p_credits_needed: 1
+      })
       .single();
 
-    if (!user || user.credits <= 0) {
-      return NextResponse.json({ error: 'Insufficient credits' }, { status: 402 });
+    if (creditError || !creditResult?.success) {
+      return NextResponse.json({ 
+        error: creditResult?.message || 'Insufficient credits' 
+      }, { status: 402 });
     }
 
     // Stage 1: Analyze input
@@ -188,24 +220,21 @@ export async function POST(request: NextRequest) {
     const finalContent = validateAndFormatContent(rawContent, format);
 
     if (finalContent.length === 0) {
+      // Refund credit if generation failed
+      await supabaseAdmin
+        .from('users')
+        .update({ credits: creditResult.remaining_credits + 1 })
+        .eq('id', session.user.id);
+      
       return NextResponse.json({ error: 'No content generated' }, { status: 500 });
     }
-
-    // Deduct credit and record transaction
-    const creditsUsed = 1;
-    const newCredits = user.credits - creditsUsed;
-
-    await supabaseAdmin
-      .from('users')
-      .update({ credits: newCredits })
-      .eq('id', session.user.id);
 
     // Record credit transaction
     await supabaseAdmin
       .from('credit_transactions')
       .insert({
         user_id: session.user.id,
-        amount: -creditsUsed,
+        amount: -1,
         type: 'usage',
       });
 
@@ -218,12 +247,12 @@ export async function POST(request: NextRequest) {
         output_text: finalContent[0],
         format: format,
         tone: tone,
-        credits_used: creditsUsed,
+        credits_used: 1,
       });
 
     return NextResponse.json({ 
       content: finalContent,
-      creditsRemaining: newCredits 
+      creditsRemaining: creditResult.remaining_credits 
     });
   } catch (error) {
     console.error('Error in generate API:', error);
